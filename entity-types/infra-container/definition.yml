@@ -396,6 +396,46 @@ synthesis:
     prefixedTags:
       label.:
 
+  # K8s container logs shipped via newrelic-logging Helm chart
+  - identifier: logging.k8s.container.identifier
+    name: container_name
+    legacyFeatures:
+      overrideGuidType: true
+    conditions:
+      - attribute: eventType
+        prefix: Log
+      - attribute: logging.k8s.container.identifier
+        present: true
+        # We don't want to materialize as an Infra Container if the log contains attributes that would result in an
+        # EXT|SERVICE entity
+      - attribute: service.name
+        present: false
+      - attribute: serviceName
+        present: false
+      - attribute: service_name
+        present: false
+    tags:
+      cluster_name:
+        entityTagName: k8s.clusterName
+      container_image:
+        entityTagName: k8s.containerImage
+      container_name:
+        entityTagName: k8s.containerName
+      # The newrelic-logging Helm chart uses Fluent Bit internally with the K8s plugin (https://docs.fluentbit.io/manual/pipeline/filters/kubernetes),
+      # which reports the container ID as the "docker_id" attribute (independently of the underlying container runtime)
+      # due to this regex: https://github.com/fluent/fluent-bit/blob/master/conf/parsers.conf#L130
+      docker_id:
+        entityTagName: k8s.containerId
+        multiValue: false
+      host:
+        entityTagName: k8s.nodeName
+      namespace_name:
+        entityTagName: k8s.namespaceName
+      pod_name:
+        entityTagName: k8s.podName
+    prefixedTags:
+      label.:
+
   tags:
     newrelic.integrationName:
     newrelic.integrationVersion:
