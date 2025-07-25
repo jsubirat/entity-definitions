@@ -406,6 +406,8 @@ synthesis:
         prefix: Log
       - attribute: logging.k8s.container.identifier
         present: true
+      - attribute: logging.testing.synthesize.k8s.container
+        value: "true"
         # We don't want to materialize as an Infra Container if the log contains attributes that would result in an
         # EXT|SERVICE entity
       - attribute: service.name
