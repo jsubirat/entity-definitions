@@ -16,5 +16,25 @@
         "severity.number": 9,
         "severity.text": "INFO",
         "telemetry.sdk.language": "java"
+    },
+    {
+      "fd": "239",
+      "instrumentation.name": "nr_ebpf",
+      "instrumentation.provider": "newrelic-ebpf",
+      "instrumentation.version": "1.3.0",
+      "language": "java",
+      "level": "DEBUG",
+      "message": "2026-02-23T15:53:55.904Z DEBUG 27 --- log message",
+      "original_msg_size": 377,
+      "otel.library.name": "",
+      "otel.library.version": "",
+      "process.id": "19599",
+      "sent_msg_size": 377,
+      "service.name": "my-cool-service-name",
+      "source": "/tmp/logs/syscall-app.log",
+      "telemetry.language": "java",
+      "telemetry.name": "nr_ebpf",
+      "telemetry.version": "1.3.0",
+      "truncated": false
     }
 ]
